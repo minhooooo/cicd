@@ -2,9 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-test
-  labels:
-    env: dev
+  namespace: default
 spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 2
   selector:
     matchLabels:
       app: deploy-test
@@ -12,3 +17,9 @@ spec:
     metadata:
       labels:
         app: deploy-test
+    spec:
+      containers:
+        - name: deploy-test
+          image: dbgurum/devweb:2.0
+          ports:
+            - containerPort: 5000
