@@ -4,8 +4,7 @@ metadata:
   name: sample
 spec:
   rules:
-  - host: "sample.192.168.50.16.nip.io"
-    http:
+  - http:
       paths:
       - pathType: Prefix
         path: "/"
